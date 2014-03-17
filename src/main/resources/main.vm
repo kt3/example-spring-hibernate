@@ -1,0 +1,23 @@
+#* @vtlvariable name="items" type="java.util.List" *#
+#* @vtlvariable name="item" type="example.dao.entity.Item" *#
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Item list</h1>
+<ul>
+  #foreach($item in $items)
+   <li>
+       <div>
+       <a href="/edit/$item.id">$item.name</a>
+           </br>
+       $item.date
+       </div>
+   </li>
+  #end
+</ul>
+
+</body>
+
+</html>

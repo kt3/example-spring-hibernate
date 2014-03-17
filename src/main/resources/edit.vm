@@ -1,0 +1,17 @@
+#* @vtlvariable name="item" type="example.dao.entity.Item" *#
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Edit "$item.name"</h1>
+<ul>
+  <form action="POST" target="/save/:id/">
+      <input type="text" value="$item.description">
+      <button type="submit">Save</button>
+  </form>
+</ul>
+
+</body>
+
+</html>
