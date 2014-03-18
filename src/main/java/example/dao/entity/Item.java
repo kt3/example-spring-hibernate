@@ -54,4 +54,8 @@ public class Item {
     public void setDescription(byte[] description) {
         this.description = description;
     }
+
+    public String getDescriptionText(){
+        return new String(description);
+    }
 }

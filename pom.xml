@@ -133,33 +133,53 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>example.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>example.App</mainClass>
-                        </manifest>
-                    </archive>
+                    <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                    <overWriteReleases>false</overWriteReleases>
+                    <overWriteSnapshots>false</overWriteSnapshots>
+                    <overWriteIfNewer>true</overWriteIfNewer>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-my-jar-with-dependencies</id>
+                        <id>copy-dependencies</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-assembly-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<descriptorRefs>-->
+                        <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+                    <!--</descriptorRefs>-->
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass>example.App</mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>make-my-jar-with-dependencies</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>directory</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

@@ -58,7 +58,7 @@ public class App {
                 long id = Long.parseLong(request.params(":id"));
                 Map<String, Object> attributes = new HashMap<String, Object>();
                 attributes.put("item", itemService.findItem(id));
-                return modelAndView(attributes, "edit.vm");
+                return modelAndView(attributes, "views/edit.vm");
             }
         });
 
@@ -70,7 +70,7 @@ public class App {
                 createData(itemService);
                 Map<String, Object> attributes = new HashMap<String, Object>();
                 attributes.put("items", itemService.getAllItems());
-                return modelAndView(attributes, "main.vm");
+                return modelAndView(attributes, "views/main.vm");
             }
         });
 

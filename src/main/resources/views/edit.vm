@@ -6,12 +6,12 @@
 <body>
 <h1>Edit "$item.name"</h1>
 <ul>
-  <form action="POST" target="/save/:id/">
-      <input type="text" value="$item.description">
+  <form action="/save/$item.id/" method="POST">
+      <input type="text" value="$item.descriptionText">
       <button type="submit">Save</button>
   </form>
-</ul>
 
+</ul>
 </body>
 
 </html>
