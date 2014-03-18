@@ -1,16 +1,22 @@
 #* @vtlvariable name="item" type="example.dao.entity.Item" *#
+#* @vtlvariable name="mode" type="example.EditMode" *#
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
+    #if ($mode.equals(EditMode.NEW))
+    <h1>Create new item</h1>
+    #end
 <h1>Edit "$item.name"</h1>
 <ul>
-  <form action="/save/$item.id" method="POST">
-      <input name="description" type="text" value="$item.descriptionText"/>
-      <button type="submit">Save</button>
-  </form>
-
+    <form action="/save/$item.id" method="POST">
+        #if ($mode.equals(EditMode.NEW))
+            <input name="name" type="text" placeholder="Enter name" value=""/>
+        #end
+        <textarea name="description" type="text" placeholder="Enter description" value="$item.descriptionText"/>
+        <button type="submit">Save</button>
+    </form>
 </ul>
 </body>
 

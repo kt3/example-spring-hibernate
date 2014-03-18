@@ -39,8 +39,16 @@ public class App {
             public Object handle(Request request, Response response) {
                 ItemService itemService = getContext().getBean(ItemService.class);
                 long id = Long.parseLong(request.params(":id"));
-                Map<String, Object> attributes = new HashMap<String, Object>();
-                attributes.put("item", itemService.findItem(id));
+                Map<String, Object> attributes = getAttributes(itemService.findItem(id), EditMode.EDIT);
+                return modelAndView(attributes, "views/edit.vm");
+            }
+
+        });
+
+        get(new VelocityRoute("/add/") {
+            @Override
+            public Object handle(Request request, Response response) {
+                Map<String, Object> attributes = getAttributes(new Item(), EditMode.NEW);
                 return modelAndView(attributes, "views/edit.vm");
             }
         });
@@ -69,9 +77,14 @@ public class App {
             @Override
             public Object handle(Request request, Response response) {
                 ItemService itemService = getContext().getBean(ItemService.class);
-                long id = Long.parseLong(request.params(":id"));
+                Item item;
+                if (!request.params(":id").isEmpty()) {
+                    long id = Long.parseLong(request.params(":id"));
+                    item = itemService.findItem(id);
+                } else {
+                    item = new Item();
+                }
                 String description = request.queryMap("description").value();
-                Item item = itemService.findItem(id);
                 item.setDescription(description.getBytes());
                 itemService.update(item);
                 response.redirect("/");
@@ -79,6 +92,13 @@ public class App {
             }
         });
 
+    }
+
+    private static Map<String, Object> getAttributes(Item item, EditMode edit) {
+        Map<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put("item", item);
+        attributes.put("mode", edit);
+        return attributes;
     }
 
     private static void createData(ItemService itemService) {
