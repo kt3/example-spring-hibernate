@@ -10,5 +10,7 @@ public interface ItemService {
 
     Item findItem(long id);
 
+    void update(Item item);
+
     List<Item> getAllItems();
 }

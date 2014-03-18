@@ -30,11 +30,11 @@ public class ItemDaoImpl implements ItemDao{
 
     @Override
     public void update(Item item) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        em.merge(item);
     }
 
     @Override
     public void delete(Item item) {
-        //To change body of implemented methods use File | Settings | File Templates.
+       em.remove(item);
     }
 }

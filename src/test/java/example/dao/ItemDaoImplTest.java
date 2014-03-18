@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @ContextConfiguration("classpath:appContext.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,18 +30,39 @@ public class ItemDaoImplTest {
 
     @Test
     public void testRead() {
-        Item item = new Item();
-        item.setName("item-name");
-        item.setDate(new Date());
+        Item item = createItem();
 
-        em.persist(item);
+        Item itemFromDb=subj.read(item.getId());
+        assertNotNull(itemFromDb);
+    }
+
+
+    @Test
+    public void testDelete(){
+        Item item=createItem();
+
+        item=em.find(Item.class, item.getId());
+        subj.delete(item);
 
         em.flush();
         em.clear();
 
-        Item itemFromDb=subj.read(item.getId());
-        assertNotNull(itemFromDb);
+        assertNull(em.find(Item.class,item.getId()));
+    }
 
+    @Test
+    public void testUpdate(){
+        Item item=createItem();
+
+        Item itemToEdit=new Item();
+        itemToEdit.setId(item.getId());
+        String name = "newName";
+        itemToEdit.setName(name);
+
+        subj.update(itemToEdit);
+
+        item=em.find(Item.class,item.getId());
+        assertEquals(name, item.getName());
 
     }
 
@@ -58,6 +80,19 @@ public class ItemDaoImplTest {
 
         List<Item> itemList=subj.list();
         assertEquals(3,itemList.size());
+    }
+
+    private Item createItem() {
+        Item item = new Item();
+        item.setName("item-name");
+        item.setDate(new Date());
+
+        em.persist(item);
+
+        em.flush();
+        em.clear();
+
+        return item;
     }
 
 }

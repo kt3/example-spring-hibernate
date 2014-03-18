@@ -56,6 +56,7 @@ public class Item {
     }
 
     public String getDescriptionText(){
+        if (description == null) return "";
         return new String(description);
     }
 }

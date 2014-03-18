@@ -3,16 +3,12 @@ package example.json.transform;
 import com.google.gson.Gson;
 import spark.ResponseTransformerRoute;
 
-/**
- *  Преобразует в JSON
- */
 public abstract class JsonTransformer extends ResponseTransformerRoute {
 
     private Gson gson=new Gson();
 
     protected JsonTransformer(String route){
         super(route, "application/json");
-
     }
 
     @Override

@@ -1,7 +1,6 @@
 package example;
 
 import example.dao.entity.Item;
-import example.json.transform.JsonTransformer;
 import example.service.ItemService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,10 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
-/**
- * Hello world!
- */
+
 public class App {
 
     private static volatile ApplicationContext applicationContext;
@@ -35,21 +33,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        get(new Route("/example") {
-            @Override
-            public Object handle(Request request, Response response) {
-                return "<h1>Hello world!</h1>";
-            }
-        });
-
-        get(new JsonTransformer("/items") {
-            @Override
-            public Object handle(Request request, Response response) {
-                ItemService itemService = getContext().getBean(ItemService.class);
-                createData(itemService);
-                return itemService.getAllItems();
-            }
-        });
 
         get(new VelocityRoute("/edit/:id") {
             @Override
@@ -63,21 +46,42 @@ public class App {
         });
 
         get(new VelocityRoute("/") {
-
             @Override
             public Object handle(Request request, Response response) {
                 ItemService itemService = getContext().getBean(ItemService.class);
-                createData(itemService);
                 Map<String, Object> attributes = new HashMap<String, Object>();
                 attributes.put("items", itemService.getAllItems());
                 return modelAndView(attributes, "views/main.vm");
             }
         });
 
+        get(new Route("/start") {
+            @Override
+            public Object handle(Request request, Response response) {
+                ItemService itemService = getContext().getBean(ItemService.class);
+                createData(itemService);
+                response.redirect("/");
+                return null;
+            }
+        });
+
+        post(new Route("/save/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                ItemService itemService = getContext().getBean(ItemService.class);
+                long id = Long.parseLong(request.params(":id"));
+                String description = request.queryMap("description").value();
+                Item item = itemService.findItem(id);
+                item.setDescription(description.getBytes());
+                itemService.update(item);
+                response.redirect("/");
+                return null;
+            }
+        });
 
     }
 
-    private static void createData(ItemService itemService)  {
+    private static void createData(ItemService itemService) {
         Item item = new Item();
         item.setName("bzzz");
         item.setDescription("the description of the item".getBytes());

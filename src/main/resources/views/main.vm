@@ -12,6 +12,8 @@
        <div>
        <a href="/edit/$item.id">$item.name</a>
            </br>
+           <i>$item.descriptionText</i>
+           </br>
        $item.date
        </div>
    </li>
