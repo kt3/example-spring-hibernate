@@ -31,6 +31,15 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public void deleteById(long id) {
+        Item item = itemDao.read(id);
+        if (item == null) {
+            return;
+        }
+        itemDao.delete(item);
+    }
+
+    @Override
     public List<Item> getAllItems() {
         return itemDao.list();
     }

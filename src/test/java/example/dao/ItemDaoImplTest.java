@@ -85,7 +85,7 @@ public class ItemDaoImplTest {
     private Item createItem() {
         Item item = new Item();
         item.setName("item-name");
-        item.setDate(new Date());
+        item.setCreateDate(new Date());
 
         em.persist(item);
 

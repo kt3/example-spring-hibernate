@@ -5,17 +5,38 @@
 <head>
 </head>
 <body>
-    #if ($mode.equals(EditMode.NEW))
+    #if ($mode.toString().equals("NEW"))
     <h1>Create new item</h1>
+    #else
+    <h1>Edit "$item.name"</h1>
     #end
-<h1>Edit "$item.name"</h1>
 <ul>
-    <form action="/save/$item.id" method="POST">
-        #if ($mode.equals(EditMode.NEW))
-            <input name="name" type="text" placeholder="Enter name" value=""/>
-        #end
-        <textarea name="description" type="text" placeholder="Enter description" value="$item.descriptionText"/>
-        <button type="submit">Save</button>
+    <form action="/save/#if($item.id!=0)$item.id#end" method="POST">
+        <table>
+            #if ($mode.toString().equals("NEW"))
+                <tr>
+                    <td>
+                        <label for="name">Item name:</label>
+                    </td>
+                    <td>
+                        <input id="name" name="name" type="text" placeholder="Enter name" value=""/>
+                    </td>
+                </tr>
+            #end
+            <tr>
+                <td>
+                    <label for="desription">Item description:</label>
+                </td>
+                <td>
+                    <textarea id="desription" name="description" rows="5" cols="15" placeholder="Enter description">$item.descriptionText</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
+            </tr>
+        </table>
     </form>
 </ul>
 </body>

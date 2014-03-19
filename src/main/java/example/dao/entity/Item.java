@@ -21,7 +21,7 @@ public class Item {
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date createDate;
 
     public long getId() {
         return id;
@@ -39,12 +39,12 @@ public class Item {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public byte[] getDescription() {

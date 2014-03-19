@@ -12,5 +12,7 @@ public interface ItemService {
 
     void update(Item item);
 
+    void deleteById(long id);
+
     List<Item> getAllItems();
 }

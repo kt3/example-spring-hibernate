@@ -77,16 +77,44 @@ public class App {
             @Override
             public Object handle(Request request, Response response) {
                 ItemService itemService = getContext().getBean(ItemService.class);
-                Item item;
-                if (!request.params(":id").isEmpty()) {
-                    long id = Long.parseLong(request.params(":id"));
-                    item = itemService.findItem(id);
-                } else {
-                    item = new Item();
+                if (request.params(":id").isEmpty()) {
+                    return null;
                 }
+                long id = Long.parseLong(request.params(":id"));
+                Item item = itemService.findItem(id);
                 String description = request.queryMap("description").value();
                 item.setDescription(description.getBytes());
                 itemService.update(item);
+                response.redirect("/");
+                return null;
+            }
+        });
+
+        get(new Route("/delete/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                ItemService itemService = getContext().getBean(ItemService.class);
+                if (request.params(":id").isEmpty()) {
+                    return null;
+                }
+                long id = Long.parseLong(request.params(":id"));
+                itemService.deleteById(id);
+                response.redirect("/");
+                return null;
+            }
+        });
+
+        post(new Route("/save/") {
+            @Override
+            public Object handle(Request request, Response response) {
+                ItemService itemService = getContext().getBean(ItemService.class);
+                Item item = new Item();
+                String description = request.queryMap("description").value();
+                String name = request.queryMap("name").value();
+                item.setDescription(description.getBytes());
+                item.setName(name);
+                item.setCreateDate(new Date());
+                itemService.createItem(item);
                 response.redirect("/");
                 return null;
             }
@@ -105,25 +133,25 @@ public class App {
         Item item = new Item();
         item.setName("bzzz");
         item.setDescription("the description of the item".getBytes());
-        item.setDate(new Date());
+        item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
         item.setName("baa");
-        item.setDate(new Date());
+        item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
         item.setName("zzzz");
-        item.setDate(new Date());
+        item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
         item.setName("cccc");
-        item.setDate(new Date());
+        item.setCreateDate(new Date());
 
         itemService.createItem(item);
 

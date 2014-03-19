@@ -17,7 +17,9 @@
            </br>
            <i>$item.descriptionText</i>
            </br>
-       $item.date
+       Created at $item.createDate
+           </br>
+       <a href="/delete/$item.id">Delete Item</a>
        </div>
    </li>
   #end
