@@ -20,6 +20,7 @@
        Created at $item.createDate
            </br>
        <a href="/delete/$item.id">Delete Item</a>
+           </br>
        </div>
    </li>
   #end

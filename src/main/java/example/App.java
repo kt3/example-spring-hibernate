@@ -131,26 +131,26 @@ public class App {
 
     private static void createData(ItemService itemService) {
         Item item = new Item();
-        item.setName("bzzz");
+        item.setName("item1");
         item.setDescription("the description of the item".getBytes());
         item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
-        item.setName("baa");
+        item.setName("Super item");
         item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
-        item.setName("zzzz");
+        item.setName("another Item");
         item.setCreateDate(new Date());
 
         itemService.createItem(item);
 
         item = new Item();
-        item.setName("cccc");
+        item.setName("item");
         item.setCreateDate(new Date());
 
         itemService.createItem(item);
