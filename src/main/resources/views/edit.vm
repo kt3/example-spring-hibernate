@@ -28,7 +28,8 @@
                     <label for="desription">Item description:</label>
                 </td>
                 <td>
-                    <textarea id="desription" name="description" rows="5" cols="15" placeholder="Enter description">$item.descriptionText</textarea>
+                    <textarea id="desription" name="description" rows="5" cols="15"
+                              placeholder="Enter description">$item.descriptionText</textarea>
                 </td>
             </tr>
             <tr>

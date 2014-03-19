@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class ItemDaoImpl implements ItemDao{
+public class ItemDaoImpl implements ItemDao {
 
     @PersistenceContext
     private EntityManager em;
@@ -20,7 +20,7 @@ public class ItemDaoImpl implements ItemDao{
 
     @Override
     public Item read(long id) {
-        return em.find(Item.class,id);
+        return em.find(Item.class, id);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class ItemDaoImpl implements ItemDao{
 
     @Override
     public void delete(Item item) {
-       em.remove(item);
+        em.remove(item);
     }
 }

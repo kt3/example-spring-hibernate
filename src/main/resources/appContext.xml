@@ -17,10 +17,10 @@
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="embeddedDatasource" />
-        <property name="packagesToScan" value="example.dao" />
+        <property name="dataSource" ref="embeddedDatasource"/>
+        <property name="packagesToScan" value="example.dao"/>
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="jpaProperties">
             <props>
@@ -33,21 +33,21 @@
     <jdbc:embedded-database id="embeddedDatasource"/>
 
     <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
-        <!--<property name="url" value="jdbc:mysql://localhost:3306/spring_jpa" />-->
-        <!--<property name="username" value="tutorialuser" />-->
-        <!--<property name="password" value="tutorialmy5ql" />-->
+    <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+    <!--<property name="url" value="jdbc:mysql://localhost:3306/spring_jpa" />-->
+    <!--<property name="username" value="tutorialuser" />-->
+    <!--<property name="password" value="tutorialmy5ql" />-->
     <!--</bean>-->
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <tx:annotation-driven />
+    <tx:annotation-driven/>
 
-    <context:component-scan base-package="example" />
+    <context:component-scan base-package="example"/>
 
     <bean id="persistenceExceptionTranslationPostProcessor"
-          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 
 </beans>

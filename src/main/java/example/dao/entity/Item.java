@@ -55,8 +55,10 @@ public class Item {
         this.description = description;
     }
 
-    public String getDescriptionText(){
-        if (description == null) return "";
+    public String getDescriptionText() {
+        if (description == null) {
+            return "";
+        }
         return new String(description);
     }
 }
