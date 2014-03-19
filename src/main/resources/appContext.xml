@@ -7,16 +7,6 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>
-                    classpath:app.properties
-                </value>
-            </list>
-        </property>
-    </bean>
-
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="embeddedDatasource"/>
         <property name="packagesToScan" value="example.dao"/>
@@ -36,6 +26,7 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+
     <tx:annotation-driven/>
 
     <context:component-scan base-package="example"/>

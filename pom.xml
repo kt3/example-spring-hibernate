@@ -112,11 +112,6 @@
             <version>${hsqldb.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
-        </dependency>
-        <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-template-velocity</artifactId>
             <version>${spark.velocity.version}</version>
